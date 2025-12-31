@@ -1,0 +1,17 @@
+#!/bin/bash
+# PostToolUse: Run isort on Python files after tool use
+# Usage: PostToolUse file1.py file2.txt file3.py ...
+
+if ! command -v isort &> /dev/null; then
+  echo "Error: isort is not installed. Please install it with 'pip install isort'."
+  exit 1
+fi
+
+found_py=0
+for file in "$@"; do
+  if [[ "$file" == *.py ]] && [ -f "$file" ]; then
+    repo_root=$(cd "$(dirname "$file")" && git rev-parse --show-toplevel 2>/dev/null || dirname "$file")
+    isort --settings-path "$repo_root" "$file"
+    found_py=1
+  fi
+done
