@@ -16,6 +16,11 @@ fi
 
 # Read JSON from stdin
 files_json=$(cat)
+toolname=$(echo "$files_json" | jq -r '.postToolUse.toolName // empty')
+if [[ "$toolname" != "write_to_file" && "$toolname" != "replace_in_file" ]]; then
+  echo "No hooks for tool $toolname"
+  exit 0
+fi
 path=$(echo "$files_json" | jq -r '.postToolUse.parameters.path // empty')
 workspace_root=$(echo "$files_json" | jq -r '.workspaceRoots[0] // empty')
 
@@ -42,6 +47,6 @@ if [[ "$abs_path" == *.py ]]; then
   echo "Running isort on $abs_path"
   isort "$abs_path"
 else
-  echo "File in postToolUse.parameters.path is not a Python file: $abs_path"
+  echo "File $abs_path is not a Python file."
   exit 0
 fi
