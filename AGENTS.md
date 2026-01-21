@@ -9,6 +9,6 @@ All agents must follow these rules:
 3) Commit messages must follow the same Conventional Commits-style prefixes and include a short functional description plus a user-facing value proposition.
 4) PR descriptions must include Summary, Rationale, and Details sections.
 5) If the branch you're assigned to work on is from a remote (ie origin/master or upstream/awesome-feature) you must ensure you fetch and pull from the remote before you begin your work.
-6) Keep updates clean: avoid committing local worktree directories or metadata (for example `/.worktrees/` or `/worktrees/`), ensure these stay ignored in `.gitignore`, and only change files required by the task.
+6) Keep updates clean: avoid committing local worktree directories or metadata (for example `/.worktrees/` or `/worktrees/`). Ensure these stay ignored in `.gitignore` (do not remove or narrow them, add if missing), and only change files required by the task.
 
 Reference: https://www.conventionalcommits.org/en/v1.0.0/
